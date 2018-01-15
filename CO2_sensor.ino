@@ -14,6 +14,14 @@ TimePlot MyPlot;
 int status = 0;
 
 /*
+ * DHT11 humidity
+ */
+
+#include <dht.h>
+dht DHT;
+#define DHT11_PIN 5
+
+/*
  * CO2 sensor
  */
 
@@ -93,6 +101,7 @@ void setup() {
 
 void loop() {
   loop_CO2();
+  loop_dht11();
   loop_pressuretemp();
   loop_dust();
   loop_lux();
@@ -102,6 +111,16 @@ void loop() {
 }
 
 /**********************************************************************************************************/
+
+/*
+ * DHT11
+ */
+
+void loop_dht11() {
+  int chk = DHT.read11(DHT11_PIN);
+  MyPlot.SendData("Relative humidity, %", DHT.humidity );
+  MyPlot.SendData("Temp, C (DHT11)", DHT.temperature );
+}
 
 /*
  * DS18B20
