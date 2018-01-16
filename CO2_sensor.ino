@@ -89,7 +89,7 @@ DallasTemperature sensors(&oneWire);
  */
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   swSerial.begin(9600);
   setup_rgb();
   setup_CO2();
@@ -119,7 +119,7 @@ void loop() {
 void loop_dht11() {
   int chk = DHT.read11(DHT11_PIN);
   MyPlot.SendData("Relative humidity, %", DHT.humidity );
-  MyPlot.SendData("Temp, C (DHT11)", DHT.temperature );
+//  MyPlot.SendData("Temp, C (DHT11)", DHT.temperature );
 }
 
 /*
@@ -519,7 +519,7 @@ void led_green() {
       strip.setPixelColor(id, strip.Color(0,col,0,0) );
     }
     strip.show();
-    delay(8);
+    delay(14);
   }
   //Serial.println("/green");
   for(uint16_t col=255; col>0; col -= 1) {
