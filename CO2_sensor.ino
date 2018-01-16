@@ -267,13 +267,20 @@ Health Administration).
   if (trueppm > 600 && trueppm <= 1000) {
 //    Serial.println("red");
     status = 3; // red    
+    force_vent();  
   }
 
   if (trueppm > 1000 && trueppm <= 2000) {
 //    Serial.println("magenta");
     status = 4; // magenta    
+    force_vent();  
   }
+}
 
+void force_vent() {
+  digitalWrite(ventPin, HIGH);
+  delay(12000);
+  digitalWrite(ventPin, LOW);
 }
 
 /*
@@ -450,11 +457,11 @@ void led_red() {
     delay(1);
   }
   //Serial.println("/red");
-  for(uint16_t col=255; col>8; col -= 1) {
+  for(uint16_t col=255; col>0; col -= 1) {
     for(uint16_t id=0; id<strip.numPixels(); id++) {
       strip.setPixelColor(id, strip.Color(col,0,0,0) );
     }
-    Serial.println(col);
+    //Serial.println(col);
     strip.show();
     delay(3);
   }
@@ -472,7 +479,7 @@ void led_yellow() {
     delay(4);
   }
   //Serial.println("/yellow");
-  for(uint16_t col=255; col>8; col -= 1) {
+  for(uint16_t col=255; col>0; col -= 1) {
     for(uint16_t id=0; id<strip.numPixels(); id++) {
       strip.setPixelColor(id, strip.Color(col,col,0,0) );
     }
@@ -494,7 +501,7 @@ void led_blue() {
   }
   //Serial.println("/blue");
   led_clear();
-  for(uint16_t col=255; col>8; col -= 1) {
+  for(uint16_t col=255; col>0; col -= 1) {
     for(uint16_t id=0; id<strip.numPixels(); id++) {
       strip.setPixelColor(id, strip.Color(0,0,col,0) );
     }
@@ -515,7 +522,7 @@ void led_green() {
     delay(8);
   }
   //Serial.println("/green");
-  for(uint16_t col=255; col>8; col -= 1) {
+  for(uint16_t col=255; col>0; col -= 1) {
     for(uint16_t id=0; id<strip.numPixels(); id++) {
       strip.setPixelColor(id, strip.Color(0,col,0,0) );
     }
@@ -536,7 +543,7 @@ void led_magenta() {
     delay(1);
   }
   //Serial.println("/magenta");
-  for(uint16_t col=255; col>1; col -= 1) {
+  for(uint16_t col=255; col>0; col -= 1) {
     for(uint16_t id=0; id<strip.numPixels(); id++) {
       strip.setPixelColor(id, strip.Color(col,0,col,0) );
     }
